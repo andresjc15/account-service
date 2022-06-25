@@ -1,0 +1,12 @@
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/account_service
+
+server:
+  port: 8081
+
+config:
+  base:
+    endpoint: http://localhost:8082/api/enterprise-customers
