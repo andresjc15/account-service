@@ -19,9 +19,6 @@ public class Customer {
     @NotBlank(message = "Email no puede ser nulo o vacio")
     private String email;
 
-    //@JsonIgnoreProperties(value={"enterprise_customers", "personal_customers", "hibernateLazyInitializer", "handler"}, allowSetters=true)
-    //private List<String> accounts;
-
     private boolean isActive;
     private Date createdAt;
     private Date updatedAt;

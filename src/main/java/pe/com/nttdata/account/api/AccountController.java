@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.com.nttdata.account.client.customer.model.EnterpriseCustomer;
 import pe.com.nttdata.account.client.customer.model.service.EnterpriseCostumerService;
 import pe.com.nttdata.account.model.document.Account;
+import pe.com.nttdata.account.model.request.AccountRequest;
 import pe.com.nttdata.account.model.service.AccountService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,7 +16,7 @@ import javax.validation.Valid;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/api/accounts")
+@RequestMapping("${path.accounts}")
 @AllArgsConstructor
 public class AccountController {
 
@@ -32,13 +33,15 @@ public class AccountController {
     public Mono<Account> getAccount(@PathVariable Long id) { return accountService.findById(id); }
 
     @PostMapping
-    public Mono<Account> register(@Valid @RequestBody Account account) throws ExecutionException,
+    public Mono<Account> register(@Valid @RequestBody AccountRequest accountRequest) throws ExecutionException,
             InterruptedException {
+        Account account = new Account(accountRequest);
         return accountService.save(account);
     }
 
     @PutMapping
-    public Mono<Account> update(@Valid @RequestBody Account account) {
+    public Mono<Account> update(@Valid @RequestBody AccountRequest accountRequest) {
+        Account account = new Account(accountRequest);
         return accountService.update(account);
     }
 

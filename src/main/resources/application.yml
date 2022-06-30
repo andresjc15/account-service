@@ -1,12 +1,25 @@
 
 spring:
+  application:
+    name: account-service
   data:
     mongodb:
       uri: mongodb://localhost:27017/account_service
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    status-page-url-path: /swagger-ui/
+
 server:
-  port: 8081
+  port: ${PORT:0}
 
 config:
-  base:
-    endpoint: http://localhost:8082/api/enterprise-customers
+  endpoint:
+    enterprise-customers: lb://customer-service/api/enterprise-customers
+
+path:
+  accounts: /api/accounts

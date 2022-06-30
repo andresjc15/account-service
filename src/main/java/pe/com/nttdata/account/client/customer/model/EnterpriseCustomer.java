@@ -6,6 +6,6 @@ import lombok.Data;
 public class EnterpriseCustomer extends Customer {
 
     private String businessName;
-    private Long RUC;
+    private Long ruc;
 
 }

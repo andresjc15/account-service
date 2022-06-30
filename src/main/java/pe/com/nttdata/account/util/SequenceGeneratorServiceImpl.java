@@ -29,9 +29,9 @@ public class SequenceGeneratorServiceImpl implements SequenceGeneratorService {
     @Override
     public long generateSequence(final String sequenceName) throws InterruptedException, ExecutionException {
         return mongoOperations.findAndModify(new Query(Criteria.where("_id").is(sequenceName)),
-                new Update().inc("sequence", 1), options().returnNew(true).upsert(true), DatabaseSequence.class).doOnSuccess(object -> {
-            log.debug("databaseSequence is evaluated: {}", object);
-        }).toFuture().get().getSequence();
+                new Update().inc("sequence", 1), options().returnNew(true).upsert(true), DatabaseSequence.class)
+                .doOnSuccess(object -> log.debug("databaseSequence is evaluated: {}", object))
+                .toFuture().get().getSequence();
     }
 
 }
