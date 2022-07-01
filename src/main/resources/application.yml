@@ -5,6 +5,10 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/account_service
+      #uri: mongodb+srv://useris:ispvispv@cluster0.iceaw.mongodb.net/test?authSource=admin&replicaSet=atlas-b109it-shard-0&readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false
+  cloud:
+    config:
+      uri: http://localhost:8888
 
 eureka:
   client:
@@ -15,7 +19,8 @@ eureka:
     status-page-url-path: /swagger-ui/
 
 server:
-  port: ${PORT:0}
+  port: 5100
+  #port: ${PORT:0}
 
 config:
   endpoint:
