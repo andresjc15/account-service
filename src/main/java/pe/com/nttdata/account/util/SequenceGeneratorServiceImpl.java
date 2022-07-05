@@ -1,5 +1,6 @@
 package pe.com.nttdata.account.util;
 
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class SequenceGeneratorServiceImpl implements SequenceGeneratorService {
     }
 
     @Override
-    public long generateSequence(final String sequenceName) throws InterruptedException, ExecutionException {
+    public long generateSequence(final String sequenceName) throws ExecutionException, InterruptedException {
         return mongoOperations.findAndModify(new Query(Criteria.where("_id").is(sequenceName)),
                 new Update().inc("sequence", 1), options().returnNew(true).upsert(true), DatabaseSequence.class)
                 .doOnSuccess(object -> log.debug("databaseSequence is evaluated: {}", object))

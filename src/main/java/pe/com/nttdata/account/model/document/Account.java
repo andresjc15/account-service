@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import pe.com.nttdata.account.model.request.AccountRequest;
+import pe.com.nttdata.account.type.model.document.TypeAccount;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -28,6 +29,7 @@ public class Account {
     private String hexId;
 
     private String customerId;
+    private TypeAccount typeAccount;
 
     private Long numberAccount;
 
@@ -41,6 +43,7 @@ public class Account {
         this.id = accountRequest.getId();
         this.hexId = accountRequest.getHexId();
         this.customerId = accountRequest.getCustomerId();
+        this.typeAccount = accountRequest.getTypeAccount();
         this.numberAccount = accountRequest.getNumberAccount();
         this.amount = accountRequest.getAmount();
         this.transactions = accountRequest.getTransactions();

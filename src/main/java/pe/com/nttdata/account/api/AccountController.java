@@ -39,6 +39,48 @@ public class AccountController {
         return accountService.save(account);
     }
 
+    @PostMapping("/saving-account")
+    public Mono<Account> registerSavingAccount(@Valid @RequestBody AccountRequest accountRequest)
+            throws ExecutionException, InterruptedException {
+        Account account = new Account(accountRequest);
+        return accountService.saveSavingAccount(account);
+    }
+
+    @PostMapping("/current-account")
+    public Mono<Account> registerCurrentAccount(@Valid @RequestBody AccountRequest accountRequest)
+            throws ExecutionException, InterruptedException {
+        Account account = new Account(accountRequest);
+        return accountService.saveCurrentAccount(account);
+    }
+
+    @PostMapping("/fixed-term")
+    public Mono<Account> registerFixedTerm(@Valid @RequestBody AccountRequest accountRequest)
+            throws ExecutionException, InterruptedException {
+        Account account = new Account(accountRequest);
+        return accountService.saveFixedTerm(account);
+    }
+
+    @PostMapping("/personal-credit")
+    public Mono<Account> registerPersonalCredit(@Valid @RequestBody AccountRequest accountRequest)
+            throws ExecutionException, InterruptedException {
+        Account account = new Account(accountRequest);
+        return accountService.savePersonalCredit(account);
+    }
+
+    @PostMapping("/business-credit")
+    public Mono<Account> registerBusinessCredit(@Valid @RequestBody AccountRequest accountRequest)
+            throws ExecutionException, InterruptedException {
+        Account account = new Account(accountRequest);
+        return accountService.saveBusinessCredit(account);
+    }
+
+    @PostMapping("/credit-card")
+    public Mono<Account> registerCreditCard(@Valid @RequestBody AccountRequest accountRequest)
+            throws ExecutionException, InterruptedException {
+        Account account = new Account(accountRequest);
+        return accountService.saveCreditCard(account);
+    }
+
     @PutMapping
     public Mono<Account> update(@Valid @RequestBody AccountRequest accountRequest) {
         Account account = new Account(accountRequest);
