@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import pe.com.nttdata.account.model.document.Account;
+import pe.com.nttdata.account.type.model.document.TypeAccount;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,8 +23,8 @@ class AccountServiceApplicationTests {
 	private TestReporter testReporter;
 	@BeforeEach
 	void initMethodTest(TestInfo testInfo, TestReporter testReporter) {
-		this.account = new Account(0001L,"00000020f51bb4362eee2a4d", "C005", 1648517941534L,
-				new BigDecimal(300.00), null, true, new Date(), null);
+		this.account = new Account(0001L,"00000020f51bb4362eee2a4d", "C005", new TypeAccount(),
+				1648517941534L, new BigDecimal(300.00), null, true,new Date(), null);
 		this.testInfo = testInfo;
 		this.testReporter = testReporter;
 		log.info("Iniciando el metodo test");

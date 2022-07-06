@@ -1,5 +1,6 @@
 package pe.com.nttdata.account.api;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,12 +28,15 @@ public class AccountController {
     private final EnterpriseCostumerService enterpriseCostumerService;
 
     @GetMapping
+    @Operation(summary = "Get all accounts")
     public Flux<Account> getAccounts() { return accountService.getAll(); }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get account by id")
     public Mono<Account> getAccount(@PathVariable Long id) { return accountService.findById(id); }
 
     @PostMapping
+    @Operation(summary = "Register account")
     public Mono<Account> register(@Valid @RequestBody AccountRequest accountRequest) throws ExecutionException,
             InterruptedException {
         Account account = new Account(accountRequest);
@@ -40,6 +44,7 @@ public class AccountController {
     }
 
     @PostMapping("/saving-account")
+    @Operation(summary = "Register Saving account")
     public Mono<Account> registerSavingAccount(@Valid @RequestBody AccountRequest accountRequest)
             throws ExecutionException, InterruptedException {
         Account account = new Account(accountRequest);
@@ -47,6 +52,7 @@ public class AccountController {
     }
 
     @PostMapping("/current-account")
+    @Operation(summary = "Register Current account")
     public Mono<Account> registerCurrentAccount(@Valid @RequestBody AccountRequest accountRequest)
             throws ExecutionException, InterruptedException {
         Account account = new Account(accountRequest);
@@ -54,6 +60,7 @@ public class AccountController {
     }
 
     @PostMapping("/fixed-term")
+    @Operation(summary = "Register Fixed term account")
     public Mono<Account> registerFixedTerm(@Valid @RequestBody AccountRequest accountRequest)
             throws ExecutionException, InterruptedException {
         Account account = new Account(accountRequest);
@@ -61,6 +68,7 @@ public class AccountController {
     }
 
     @PostMapping("/personal-credit")
+    @Operation(summary = "Register Personal credit")
     public Mono<Account> registerPersonalCredit(@Valid @RequestBody AccountRequest accountRequest)
             throws ExecutionException, InterruptedException {
         Account account = new Account(accountRequest);
@@ -68,6 +76,7 @@ public class AccountController {
     }
 
     @PostMapping("/business-credit")
+    @Operation(summary = "Register Bussiness credit")
     public Mono<Account> registerBusinessCredit(@Valid @RequestBody AccountRequest accountRequest)
             throws ExecutionException, InterruptedException {
         Account account = new Account(accountRequest);
@@ -75,6 +84,7 @@ public class AccountController {
     }
 
     @PostMapping("/credit-card")
+    @Operation(summary = "Register Credit card")
     public Mono<Account> registerCreditCard(@Valid @RequestBody AccountRequest accountRequest)
             throws ExecutionException, InterruptedException {
         Account account = new Account(accountRequest);
@@ -82,12 +92,14 @@ public class AccountController {
     }
 
     @PutMapping
+    @Operation(summary = "Register Update account")
     public Mono<Account> update(@Valid @RequestBody AccountRequest accountRequest) {
         Account account = new Account(accountRequest);
         return accountService.update(account);
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Register delete account")
     public Mono<Account> delete(@PathVariable Long id) { return accountService.delete(id); }
 
     @GetMapping("/client/customers")
