@@ -13,7 +13,7 @@ public class AccountRequest {
 
     private long id;
     private String hexId;
-    private String customerId;
+    private Long customerId;
     private TypeAccount typeAccount;
     private Long numberAccount;
     private BigDecimal amount;

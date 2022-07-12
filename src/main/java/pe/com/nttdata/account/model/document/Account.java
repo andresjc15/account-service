@@ -9,7 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import pe.com.nttdata.account.model.request.AccountRequest;
 import pe.com.nttdata.account.type.model.document.TypeAccount;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -29,8 +31,9 @@ public class Account {
 
     private String hexId;
 
-    @NotBlank(message = "Customer can't be blank")
-    private String customerId;
+    @NotNull(message = "Customer can't be null")
+    @Min(value = 0)
+    private Long customerId;
     private TypeAccount typeAccount;
 
     private Long numberAccount;

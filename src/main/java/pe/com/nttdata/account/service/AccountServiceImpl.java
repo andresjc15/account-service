@@ -9,7 +9,6 @@ import pe.com.nttdata.account.model.repository.AccountRepository;
 import pe.com.nttdata.account.model.service.AccountService;
 import pe.com.nttdata.account.type.model.repository.TypeAccountRepository;
 import pe.com.nttdata.account.util.SequenceGeneratorService;
-import pe.com.nttdata.account.util.SequenceGeneratorServiceImpl;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -86,6 +85,11 @@ public class AccountServiceImpl implements AccountService {
             account.setActive(true);
             account.setCreatedAt(new Date());
             account.setUpdatedAt(null);
+            long  leftLimit = 999999999999L;
+            long  rightLimit = 9999999999999L;
+            long  generatedLong = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+            System.out.println("Value: " + generatedLong);
+            account.setNumberAccount(generatedLong);
             log.info("[SAVING OBJECT]: " + account.toString());
             return accountRepository.save(account);
         });
