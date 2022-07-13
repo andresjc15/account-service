@@ -23,7 +23,7 @@ class AccountServiceApplicationTests {
 	private TestReporter testReporter;
 	@BeforeEach
 	void initMethodTest(TestInfo testInfo, TestReporter testReporter) {
-		this.account = new Account(0001L,"00000020f51bb4362eee2a4d", "C005", new TypeAccount(),
+		this.account = new Account(0001L,"00000020f51bb4362eee2a4d", 1549487561458L, new TypeAccount(),
 				1648517941534L, new BigDecimal(300.00), null, true,new Date(), null);
 		this.testInfo = testInfo;
 		this.testReporter = testReporter;

@@ -1,8 +1,7 @@
 package pe.com.nttdata.account.service;
 
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pe.com.nttdata.account.model.document.Account;
 import pe.com.nttdata.account.model.repository.AccountRepository;
@@ -15,11 +14,10 @@ import reactor.core.publisher.Mono;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class AccountServiceImpl implements AccountService {
-
-    private static final Logger log = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     private final AccountRepository accountRepository;
 
@@ -35,25 +33,25 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Mono<Account> save(Account account) throws ExecutionException, InterruptedException {
         account.setId(sequenceGeneratorService.generateSequence(Account.SEQUENCE_NAME));
-        log.info("[SAVING]");
         return typeAccountRepository.findById(account.getTypeAccount().getId()).flatMap(type -> {
             account.setTypeAccount(type);
             account.setActive(true);
             account.setCreatedAt(new Date());
             account.setUpdatedAt(null);
-            log.info("[SAVING OBJECT]: " + account.toString());
-            return accountRepository.save(account);
+            return accountRepository.save(account).doOnSuccess(obj -> {
+                log.info("[ACCOUNT SAVED SUCCESSFULLY]: " + obj);
+            });
         });
     }
 
     @Override
     public Mono<Account> update(Account account) {
-        log.info("[Account]: " + account.toString());
         return accountRepository.findById(account.getId()).flatMap(acc -> {
-            log.info("[Account amount]: " + account.getAmount());
             acc.setAmount(account.getAmount());
             acc.setUpdatedAt(new Date());
-            return accountRepository.save(acc);
+            return accountRepository.save(acc).doOnSuccess(obj -> {
+                log.info("[ACCOUNT UPDATED SUCCESSFULLY]: " + obj);
+            });
         });
     }
 
@@ -62,7 +60,9 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.findById(id).flatMap(acc -> {
             acc.setActive(false);
             acc.setUpdatedAt(new Date());
-            return accountRepository.save(acc);
+            return accountRepository.save(acc).doOnSuccess(obj -> {
+                log.info("[ACCOUNT DELETED SUCCESSFULLY]: " + obj);
+            });
         });
     }
 
